@@ -1,0 +1,10 @@
+@forward "variables";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  color: $color-black;
+  background-color: $color-white;
+}
