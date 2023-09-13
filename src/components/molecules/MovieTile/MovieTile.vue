@@ -1,23 +1,32 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import Tag from '../../atoms/Tag/Tag.vue'
+import type { Movie } from '@/components/organisms/MoviesList/MoviesList.vue';
 
-const title = ref<string>('Movie Title')
-const releaseYear = ref<string>('2015')
-const genre = ref<string>('Comedy')
+export interface Props {
+  movie: Movie;
+}
+
+const { movie } = defineProps<Props>()
+
+const vLazyload = {
+  mounted: (el: HTMLImageElement, binding: any) => {
+    el.src = binding.value
+  }
+}
 </script>
 
 <template>
   <div class="movieTileWrapper">
     <div class="movieImage">
-      <img src="/" alt="" />
+      <img v-lazyload="movie.Poster" src="/" alt="" />
     </div>
     <div class="movieTitle">
-      {{ title }}
-      <Tag />
+      {{ movie.Title }}
+      <Tag :text="movie.Year" />
     </div>
     <div class="movieGenres">
-      <span>{{ genre }} </span>
+      <span>{{ movie.Genre }} </span>
     </div>
   </div>
 </template>
