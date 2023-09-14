@@ -9,11 +9,11 @@ export interface Props {
 
 const { movie } = defineProps<Props>()
 
-const vLazyload = {
-  mounted: (el: HTMLImageElement, binding: any) => {
-    el.src = binding.value
-  }
-}
+// const vLazyload = {
+//   mounted: (el: HTMLImageElement, binding: any) => {
+//     el.src = binding.value
+//   }
+// }
 </script>
 
 <template>

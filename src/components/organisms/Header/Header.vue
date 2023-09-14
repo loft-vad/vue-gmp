@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import SearchForm from '@/components/molecules/SearchForm/SearchForm.vue';
 defineProps<{
   title: string
 }>()
@@ -15,7 +16,7 @@ defineProps<{
       </div>
       <div>
         <h1>{{ title }}</h1>
-        <SearchForm onSearch={onSearch} />
+        <SearchForm :searchTerm="SearchForm" />
       </div>
     </div>
   </header>

@@ -1,13 +1,10 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import { ref } from 'vue'
-
 const searchText = ref('')
 </script>
 
 <template>
-  <form v-on:submit.prevent="() => console.log(searchText)">
-    <input type="text" placeholder="Enter text to search" v-model.trim="searchText">
-  </form>
+  <input type="text" placeholder="Enter text to search" v-model.trim="searchText">
 </template>
 
 <style scoped lang="scss">
