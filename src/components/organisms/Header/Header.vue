@@ -16,7 +16,7 @@ defineProps<{
       </div>
       <div>
         <h1>{{ title }}</h1>
-        <SearchForm :searchTerm="SearchForm" />
+        <SearchForm :searchText="The" />
       </div>
     </div>
   </header>

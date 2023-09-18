@@ -10,7 +10,7 @@ const items: Movie[] = moviesJson
   <main class="content">
     <div class="searchFilter">
     </div>
-    <div class="moviesList">
+    <div>
       <MoviesList :items="items" />
     </div>
   </main>

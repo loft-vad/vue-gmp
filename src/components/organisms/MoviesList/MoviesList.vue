@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import MovieTile from '@/components/molecules/MovieTile/MovieTile.vue';
+import { useSearch } from '@/composables/search';
 import { ref } from 'vue';
 
 // export interface Movie {
@@ -55,13 +56,17 @@ export interface Props {
 }
 
 const { items } = defineProps<Props>()
+const { searchTerm, filteredItems: filteredItems } = useSearch(items)
 </script>
 
 <template>
-  <div class="moviesList">
-    <MovieTile v-for="(item, index) in items" :movie="item" />
+  <div>
+    <input type="text" v-model="searchTerm" />
   </div>
-  <div v-if="!items?.length">
+  <div class="moviesList">
+    <MovieTile v-for="(item, index) in filteredItems" :movie="item" />
+  </div>
+  <div v-if="!filteredItems?.length">
     No Movies Found
   </div>
 </template>

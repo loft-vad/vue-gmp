@@ -1,15 +1,17 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from 'vue';
 import Input from '@/components/atoms/Input/Input.vue';
 import Button from '@/components/atoms/Button/Button.vue';
-defineProps<{
-  searchTerm: string
+
+const { searchText } = defineProps<{
+  searchText: string
 }>()
+
 </script>
 
 <template>
-  <form v-on:submit.prevent="() => console.log(searchTerm)" class="searchWrapper">
-    <Input :searchTerm="searchTerm" />
+  <form class="searchWrapper">
+    <Input :searchText="searchText" />
     <Button />
   </form>
 </template>
