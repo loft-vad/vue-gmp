@@ -52,26 +52,24 @@ export interface Movie {
 }
 
 export interface Props {
-  items: Movie[] | []
+  items: Movie[]
 }
 
 const { items } = defineProps<Props>()
-const { searchTerm, filteredItems: filteredItems } = useSearch(items)
 </script>
 
 <template>
-  <div>
-    <input type="text" v-model="searchTerm" />
-  </div>
   <div class="moviesList">
-    <MovieTile v-for="(item, index) in filteredItems" :movie="item" />
+    <MovieTile v-for="(item, index) in items" :key="item.imdbID" :movie="item" />
   </div>
-  <div v-if="!filteredItems?.length">
+  <div v-if="!items?.length">
     No Movies Found
   </div>
 </template>
 
 <style>
+:root {}
+
 .moviesList {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;

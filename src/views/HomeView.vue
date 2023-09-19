@@ -1,17 +1,22 @@
 <script setup lang="ts">
 import MoviesList, { type Movie } from '@/components/organisms/MoviesList/MoviesList.vue';
-import moviesJson from '@/data/moviesJson.json'
+import Header from '@/components/organisms/Header/Header.vue';
+import { useSearch } from '@/composables/search';
+import { useMovies } from '@/composables/useMovies';
+import { computed, onMounted } from 'vue';
 
-const items: Movie[] = moviesJson
+// const { searchTerm, filteredItems: filteredItems } = useSearch()
+const { searchTerm, filteredItems: filteredItems, loading } = useMovies()
 
 </script>
 
 <template>
+  <Header title="Find Your Movie" v-model="searchTerm" />
   <main class="content">
     <div class="searchFilter">
     </div>
     <div>
-      <MoviesList :items="items" />
+      <MoviesList :items="filteredItems" v-if="!loading" />
     </div>
   </main>
 </template>

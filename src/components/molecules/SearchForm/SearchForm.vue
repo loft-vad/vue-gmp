@@ -3,15 +3,16 @@ import { ref } from 'vue';
 import Input from '@/components/atoms/Input/Input.vue';
 import Button from '@/components/atoms/Button/Button.vue';
 
-const { searchText } = defineProps<{
-  searchText: string
+const { modelValue } = defineProps<{
+  modelValue: string
 }>()
+defineEmits<{ (name: 'update:modelValue', value: string): void }>()
 
 </script>
 
 <template>
   <form class="searchWrapper">
-    <Input :searchText="searchText" />
+    <Input :modelValue="modelValue" @update:modelValue="$emit('update:modelValue', $event)" />
     <Button />
   </form>
 </template>

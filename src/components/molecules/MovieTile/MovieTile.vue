@@ -19,11 +19,11 @@ const { movie } = defineProps<Props>()
 <template>
   <div class="movieTileWrapper">
     <div class="movieImage">
-      <img v-lazyload="movie.Poster" src="/" alt="" />
+      <img v-lazyload="movie.Poster" src="/" :alt="movie.Title" />
     </div>
     <div class="movieTitle">
       {{ movie.Title }}
-      <Tag :text="movie.Year" />
+      <Tag :text="movie.Year || ''" />
     </div>
     <div class="movieGenres">
       <span>{{ movie.Genre }} </span>

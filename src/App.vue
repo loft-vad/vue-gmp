@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import Header from './components/organisms/Header/Header.vue';
 import Footer from './components/organisms/Footer/Footer.vue';
 </script>
 
 <template>
   <div class="contentWrapper">
-    <Header title="Find Your Movie" />
 
     <RouterView />
 

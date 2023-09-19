@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import SearchForm from '@/components/molecules/SearchForm/SearchForm.vue';
-defineProps<{
-  title: string
+
+const { title, modelValue } = defineProps<{
+  title: string,
+  modelValue: string
 }>()
+defineEmits<{ (name: 'update:modelValue', value: string): void }>()
+
 </script>
 
 <template>
@@ -12,11 +16,10 @@ defineProps<{
         <div class="logoSmall">
           <img alt="Vue logo" class="logo" src="@/assets/logo-small.svg" width="125" height="125" />
         </div>
-        <AddMovie />
       </div>
       <div>
         <h1>{{ title }}</h1>
-        <SearchForm :searchText="The" />
+        <SearchForm :modelValue="modelValue" @update:modelValue="$emit('update:modelValue', $event)" />
       </div>
     </div>
   </header>

@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 const searchText = ref('')
+defineProps(['modelValue']) // defineModel - TODO
+defineEmits<{ (name: 'update:modelValue', value: string): void }>()
 </script>
 
 <template>
-  <input type="text" placeholder="Enter text to search" v-model.trim="searchText">
+  <input type="text" placeholder="Enter text to search" :value="modelValue"
+    @input="$emit('update:modelValue', $event.target?.value as string)">
 </template>
 
 <style scoped lang="scss">
