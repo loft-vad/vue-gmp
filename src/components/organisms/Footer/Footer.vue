@@ -7,7 +7,7 @@ import { RouterLink } from 'vue-router'
     <div class="footerWrapper">
       <nav>
         <RouterLink to="/">
-          <img alt="Vue logo" src="@/assets/logo-small.svg" width="125" height="125" />
+          <img alt="Vue logo" src="@/assets/logo-small.svg" width="225" height="105" />
         </RouterLink>
       </nav>
     </div>
@@ -16,15 +16,13 @@ import { RouterLink } from 'vue-router'
 
 <style scoped lang="scss">
 footer {
-  background: $color-black;
-  height: 150px;
+  background: $color-secondary;
   display: flex;
   align-items: center;
   justify-content: center;
 
   .footerWrapper {
     height: 100%;
-    padding: 20px 60px;
   }
 }
 </style>
