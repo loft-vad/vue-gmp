@@ -1,15 +1,19 @@
 <script setup lang="ts">
 import SearchForm from '@/components/molecules/SearchForm/SearchForm.vue';
 import Switcher from '@/components/molecules/Switcher/Switcher.vue';
+import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
+import { useMoviesStore } from '@/stores/movies'
 
 const { title, modelValue } = defineProps<{
   title: string,
   modelValue: string
 }>()
 defineEmits<{ (name: 'update:modelValue', value: string): void }>()
-const options = ref(['Title', 'Genre']);
-const selected = ref(options.value[0]);
+const options = ref(['title', 'genre']);
+
+const store = useMoviesStore()
+const { searchType } = storeToRefs(store)
 </script>
 
 <template>
@@ -21,9 +25,9 @@ const selected = ref(options.value[0]);
         </div>
       </div>
       <div class="header-actions">
-        <h1>{{ title }}</h1>
+        <h1>{{ title }} {{ modelValue }}</h1>
         <SearchForm :modelValue="modelValue" @update:modelValue="$emit('update:modelValue', $event)" />
-        <Switcher :values="options" v-model="selected" label="Search by" />
+        <Switcher :values="options" v-model="searchType" label="Search by" />
       </div>
     </div>
   </header>

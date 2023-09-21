@@ -10,8 +10,6 @@ const imagesLazyload = {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const lazyImage: any = entry.target;
-            console.log("loading", lazyImage);
-
             // set data-srcset as image srcset
             lazyImage.src = binding.value;
 
@@ -24,11 +22,9 @@ const imagesLazyload = {
           }
         });
       });
-    console.log("observing", el);
     parent.lazyLoadItemObserver?.observe(el);
   },
   unmounted(el) {
-    console.log("unobserving", el);
     el.parentNode.lazyLoadItemObserver.unobserve(el);
   },
 }

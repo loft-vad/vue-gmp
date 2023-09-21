@@ -5,15 +5,12 @@ import { useMoviesStore } from '@/stores/movies';
 import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
 
-const { values } = defineProps<{
-  values?: [] | undefined,
-}>()
 defineEmits<{ (name: 'update:modelValue', value: string): void }>()
-const options = ref(['Release date', 'Rating']);
-const selected = ref(options.value[0]);
+const options = ref(['release date', 'rating']);
+// const selected = ref(options.value[0]);
 
 const store = useMoviesStore()
-const { amount } = storeToRefs(store)
+const { amount, sortType } = storeToRefs(store)
 
 // <SearchForm :modelValue="modelValue" @update:modelValue="$emit('update:modelValue', $event)" />
 </script>
@@ -24,7 +21,7 @@ const { amount } = storeToRefs(store)
       {{ amount }} movie found
     </div>
     <div>
-      <Switcher :values="options" v-model="selected" label="Sort by" />
+      <Switcher :values="options" v-model="sortType" label="Sort by" />
     </div>
   </div>
 </template>
