@@ -4,7 +4,7 @@ import type { Movie } from '@/components/organisms/MoviesList/MoviesList.vue';
 
 export function useMovies(filters = ['Title']) {
   // const items: Movie[] = moviesJson
-  let items: Movie[]
+  let items = ref<Movie[]>([])
   const searchTerm = ref('');
 
   const data = ref([])
@@ -16,9 +16,7 @@ export function useMovies(filters = ['Title']) {
     loading.value = true
     try {
       const result = await apiClient.get<Movie[]>('');
-      response.value = result.data
-      data.value = result.data.Search
-      items = response.value.Search;
+      items.value = result.data.Search;
     } catch (error) {
       error.value = error
     } finally {
@@ -30,15 +28,8 @@ export function useMovies(filters = ['Title']) {
     fetchItems();
   });
 
-  const filteredItems = computed(() => {
-    return items.filter(item => {
-      return filters.some(
-        filter => item[filter].toLowerCase().includes(
-          searchTerm.value.toLowerCase()
-        )
-      )
-    })
-  })
+  const filteredItems = computed(() => items.value.filter(item => item.Title.toLowerCase().includes(searchTerm.value.toLowerCase()))
+  )
 
   return {
     searchTerm,
