@@ -1,7 +1,9 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+interface Props {
+  text: string | ""
+}
 
-const text = ref<string>('2004')
+const { text } = defineProps<Props>()
 </script>
 
 <template>
