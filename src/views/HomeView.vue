@@ -1,36 +1,39 @@
 <script setup lang="ts">
 import MoviesList, { type Movie } from '@/components/organisms/MoviesList/MoviesList.vue';
 import Header from '@/components/organisms/Header/Header.vue';
+import ActionBar from '@/components/organisms/ActionBar/ActionBar.vue';
 import { useSearch } from '@/composables/search';
 import { useMovies } from '@/composables/useMovies';
-import { computed, onMounted } from 'vue';
+import { useMoviesStore } from '@/stores/movies'
+import { onMounted } from 'vue';
+import { storeToRefs } from 'pinia';
+const store = useMoviesStore()
+const loadMovies = store.loadMovies
+const { movies } = storeToRefs(store)
 
-// const { searchTerm, filteredItems: filteredItems } = useSearch()
-const { searchTerm, filteredItems: filteredItems, loading } = useMovies()
+const { searchTerm, filteredItems: filteredItems } = useSearch()
+// const { searchTerm, filteredItems: filteredItems, loading } = useMovies()
 
+const { searchValue } = storeToRefs(store)
+
+onMounted(() => {
+  loadMovies()
+})
 </script>
 
 <template>
-  <Header title="Find Your Movie" v-model="searchTerm" />
+  <Header title="Find Your Movie" v-model="searchValue" />
+  <ActionBar />
   <main class="content">
-    <div class="searchFilter">
-    </div>
     <div>
-      <MoviesList :items="filteredItems" v-if="!loading" />
+      <MoviesList :items="movies" />
     </div>
   </main>
 </template>
 
 <style scoped lang="scss">
 .content {
-  padding: 0 60px;
+  padding: 40px 60px;
   background: $color-black;
-}
-
-.searchFilter {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 24px;
 }
 </style>

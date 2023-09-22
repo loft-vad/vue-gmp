@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import MovieTile from '@/components/molecules/MovieTile/MovieTile.vue';
 import { useSearch } from '@/composables/search';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
 // export interface Movie {
 //   id: string,
@@ -68,8 +68,6 @@ const { items } = defineProps<Props>()
 </template>
 
 <style>
-:root {}
-
 .moviesList {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
