@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-const searchText = ref('')
-defineProps(['modelValue']) // defineModel - TODO
+defineProps(['modelValue'])
 defineEmits<{ (name: 'update:modelValue', value: string): void }>()
 </script>
 

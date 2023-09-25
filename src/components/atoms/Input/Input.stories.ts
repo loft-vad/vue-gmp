@@ -1,25 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/vue3';
+import { defineComponent } from 'vue';
 
 import Input from './Input.vue';
  
 const meta = {
   title: 'Atoms/Input',
   component: Input,
-  argTypes: {
-    size: { control: 'select', options: ['small', 'medium', 'large'] },
-    backgroundColor: { control: 'color' },
-    onClick: { action: 'clicked' },
-  },
-  args: { primary: false }, // default value
+  tags: ['autodocs'],
+  args: { modelValue: '' },
 } satisfies Meta<typeof Input>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+export const Default: Story = {
    args: {
-      primary: true,
-      placeholder: 'Enter text to search',
-      label: 'Input',
+    modelValue: 'New Value'
    },
 };
