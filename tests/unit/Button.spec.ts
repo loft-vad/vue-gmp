@@ -25,7 +25,6 @@ describe('Button component', () => {
 
   it('emits a click event when the button is clicked', async () => {
     const wrapper = mount(Primary());
-    render(Primary());
     const buttonElement = screen.getByText("Button");
     // is this correct approach to test click events?
     await wrapper.find('button').trigger('click');
