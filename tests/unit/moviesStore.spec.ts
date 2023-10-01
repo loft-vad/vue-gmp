@@ -35,6 +35,23 @@ describe('Movies Store', () => {
     expect(filteredMovies.every((movie) => movie.Title.toLowerCase().includes('Never Trust'))).toBe(true);
   });
 
+  it('filters movies by genre correctly', async () => {
+    await moviesStore.loadMovies();
+    moviesStore.searchValue = 'drama';
+    moviesStore.searchType = 'genre';
+    const filteredMovies = moviesStore.movies;
+    expect(filteredMovies.every((movie) => movie.Genre.toLowerCase().includes('drama'))).toBe(true);
+  });
+
+  it('returns 0 search results', async () => {
+    await moviesStore.loadMovies();
+    const searchValue = 'Bla bla bla';
+    moviesStore.searchValue = searchValue;
+    moviesStore.searchType = 'title';
+    const filteredMovies = moviesStore.movies;
+    expect(filteredMovies.length).toBe(0);
+  });
+  
   it('sorts movies by release date correctly', async () => {
     await moviesStore.loadMovies();
     moviesStore.searchValue = 'Godfather';
@@ -50,6 +67,7 @@ describe('Movies Store', () => {
     const sortedMovies = moviesStore.movies;
     expect(sortedMovies[0].imdbRating).toBe('9.2');
   });
+
 });
 
 describe('Movies Component', () => {

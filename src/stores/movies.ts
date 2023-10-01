@@ -53,5 +53,5 @@ export const useMoviesStore = defineStore('movies', () => {
   })
 
 
-  return { movies, loadMovies, amount, searchValue, searchType, sortType, activeSortValue }
+  return { movies, loadMovies, amount, searchValue, searchType, sortType }
 })
