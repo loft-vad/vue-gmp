@@ -3,6 +3,9 @@ import { defineStore } from 'pinia'
 import axios from 'axios';
 import type { Movie } from '@/components/organisms/MoviesList/MoviesList.vue';
 import localMovies from '@/data/moviesJson.json'
+import { useMoviesAPI } from '@/composables/useMoviesAPI';
+
+const { getAllMovies, movies } = useMoviesAPI()
 
 enum sortField {
   RELEASE = 'release date',
@@ -38,7 +41,8 @@ export const useMoviesStore = defineStore('movies', () => {
     //   'https://www.omdbapi.com/?apikey=41ce280b&s=Movie&y=2022'
     // );
     // list.value = response.data.Search;
-    list.value = localMovies
+    await getAllMovies()
+    list.value = movies
   }
 
   const movies = computed(() => {

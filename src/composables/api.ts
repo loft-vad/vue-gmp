@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const apiURL = "https://tame-erin-pike-toga.cyclic.app"
+
 const apiClient = axios.create({
-    baseURL: 'https://www.omdbapi.com/',
+    baseURL: apiURL,
     headers: {
     'Content-Type': 'application/json',
     },
