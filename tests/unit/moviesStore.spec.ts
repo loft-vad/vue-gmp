@@ -29,10 +29,10 @@ describe('Movies Store', () => {
 
   it('filters movies by title correctly', async () => {
     await moviesStore.loadMovies();
-    moviesStore.searchValue = 'Never Trust';
+    moviesStore.searchValue = 'never trust';
     moviesStore.searchType = 'title';
     const filteredMovies = moviesStore.movies;
-    expect(filteredMovies.every((movie) => movie.Title.toLowerCase().includes('Never Trust'))).toBe(true);
+    expect(filteredMovies.every((movie) => movie.Title.toLowerCase().includes('never trust'))).toBe(true);
   });
 
   it('filters movies by genre correctly', async () => {
