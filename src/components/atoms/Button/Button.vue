@@ -2,7 +2,13 @@
 import { ref } from 'vue'
 
 const handleClick = () => console.log('clicked');
-const buttonText = ref<string>('Button')
+export interface Props {
+  buttonText: string
+}
+
+const { buttonText } = withDefaults(defineProps<Props>(), {
+  buttonText: 'Button',
+})
 </script>
 
 <template>
