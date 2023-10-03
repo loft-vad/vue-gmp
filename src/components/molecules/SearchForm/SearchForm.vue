@@ -13,7 +13,7 @@ defineEmits<{ (name: 'update:modelValue', value: string): void }>()
 <template>
   <form class="searchWrapper">
     <Input :modelValue="modelValue" @update:modelValue="$emit('update:modelValue', $event)" />
-    <Button />
+    <Button buttonText="Search" />
   </form>
 </template>
 

@@ -26,7 +26,7 @@ const { movie } = defineProps<Props>()
       <Tag :text="movie.releaseDate.substring(0, 4) || ''" />
     </div>
     <div class="movieGenres">
-      <span>{{ movie.genres.join('') }} </span>
+      <span>{{ movie.genres.join(', ') }} </span>
     </div>
   </div>
 </template>
