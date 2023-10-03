@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import Tag from '../../atoms/Tag/Tag.vue'
 import type { Movie, MovieAPI } from '@/components/organisms/MoviesList/MoviesList.vue';
+import { RouterLink } from 'vue-router';
 
 export interface Props {
   movie: MovieAPI;
@@ -17,18 +18,20 @@ const { movie } = defineProps<Props>()
 </script>
 
 <template>
-  <div class="movieTileWrapper">
-    <div class="movieImage">
-      <img v-lazyload="movie.posterurl" src="/" :alt="movie.title" />
+  <RouterLink :to="{ name: 'movie', params: { id: movie.id } }">
+    <div class="movieTileWrapper">
+      <div class="movieImage">
+        <img v-lazyload="movie.posterurl" src="/" :alt="movie.title" />
+      </div>
+      <div class="movieTitle">
+        {{ movie.title }}
+        <Tag :text="movie.releaseDate.substring(0, 4) || ''" />
+      </div>
+      <div class="movieGenres">
+        <span>{{ movie.genres.join(', ') }} </span>
+      </div>
     </div>
-    <div class="movieTitle">
-      {{ movie.title }}
-      <Tag :text="movie.releaseDate.substring(0, 4) || ''" />
-    </div>
-    <div class="movieGenres">
-      <span>{{ movie.genres.join(', ') }} </span>
-    </div>
-  </div>
+  </RouterLink>
 </template>
 
 <style scoped lang="scss">

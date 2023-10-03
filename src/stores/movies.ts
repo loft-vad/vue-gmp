@@ -1,20 +1,11 @@
 import { ref, computed, reactive } from 'vue'
 import { defineStore } from 'pinia'
-import axios from 'axios';
 import type { Movie, MovieAPI } from '@/components/organisms/MoviesList/MoviesList.vue';
 import localMovies from '@/data/moviesJson.json'
 import { useMoviesAPI } from '@/composables/useMoviesAPI';
+import { searchField, sortField } from '@/types/types';
 
 const { getAllMovies, moviesList } = useMoviesAPI()
-
-enum sortField {
-  RELEASE = 'release date',
-  RATING = 'rating'
-}
-enum searchField {
-  TITLE = 'title',
-  GENRE = 'genre'
-}
 
 export const useMoviesStore = defineStore('movies', () => {
 
@@ -30,11 +21,17 @@ export const useMoviesStore = defineStore('movies', () => {
   ]
 
   const list = ref([]);
-  const amount = computed(() => list.value.length);
+  const amount = computed(() => movies.value.length);
   const searchValue = ref('')
   const searchType = ref(searchField.TITLE)
+  const selectedMovieId = ref<string>('')
   const sortType = ref(sortField.RELEASE)
   const activeSortValue = computed(() => sortValues.find(item => item.field === sortType.value))
+  // const selectedMovie = computed<MovieAPI>(() => list.value[0])
+  const selectedMovie = computed<MovieAPI>(() => {
+    return list.value.find((movie: MovieAPI) => movie.id + '' === selectedMovieId.value)
+  })
+  const selectedGenre = computed(() => selectedMovie.value.genres[0])
 
   async function loadMovies() {
     // const response = await axios.get(
@@ -57,5 +54,5 @@ export const useMoviesStore = defineStore('movies', () => {
   })
 
 
-  return { movies, loadMovies, amount, searchValue, searchType, sortType }
+  return { list, movies, loadMovies, amount, searchValue, searchType, sortType, selectedMovie, selectedGenre, selectedMovieId }
 })

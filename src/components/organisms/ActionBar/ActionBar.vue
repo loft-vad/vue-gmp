@@ -5,6 +5,9 @@ import { useMoviesStore } from '@/stores/movies';
 import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
 
+const { moviesGenre } = defineProps<{
+  moviesGenre?: string
+}>()
 defineEmits<{ (name: 'update:modelValue', value: string): void }>()
 const options = ref(['release date', 'rating']);
 // const selected = ref(options.value[0]);
@@ -16,7 +19,12 @@ const { amount, sortType } = storeToRefs(store)
 </script>
 
 <template>
-  <div class="wrapper">
+  <div v-if="moviesGenre" class="wrapper">
+    <div class="counter">
+      Films by {{ moviesGenre }} genre
+    </div>
+  </div>
+  <div v-if="!moviesGenre" class="wrapper">
     <div class="counter">
       {{ amount }} movie found
     </div>
