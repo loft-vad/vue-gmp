@@ -10,6 +10,23 @@ import { onMounted, ref } from 'vue';
 //   description?: string
 // }
 
+export interface MovieAPI {
+  year: string,
+  genres: string[],
+  ratings: number[],
+  poster: string,
+  contentRating: number,
+  duration: string,
+  releaseDate: string,
+  averageRating: number,
+  storyline: string,
+  actors: string[],
+  imdbRating: number,
+  posterurl: string,
+  id: number,
+  title: string
+}
+
 export interface Movie {
   Title?: string,
   Year?: string,
@@ -52,7 +69,7 @@ export interface Movie {
 }
 
 export interface Props {
-  items: Movie[]
+  items: MovieAPI[]
 }
 
 const { items } = defineProps<Props>()
@@ -60,7 +77,7 @@ const { items } = defineProps<Props>()
 
 <template>
   <div class="moviesList">
-    <MovieTile v-for="(item, index) in items" :key="item.imdbID" :movie="item" />
+    <MovieTile v-for="(item, index) in items" :key="item.id" :movie="item" />
   </div>
   <div v-if="!items?.length">
     No Movies Found

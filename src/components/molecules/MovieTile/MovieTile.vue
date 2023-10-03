@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import Tag from '../../atoms/Tag/Tag.vue'
-import type { Movie } from '@/components/organisms/MoviesList/MoviesList.vue';
+import type { Movie, MovieAPI } from '@/components/organisms/MoviesList/MoviesList.vue';
 
 export interface Props {
-  movie: Movie;
+  movie: MovieAPI;
 }
 
 const { movie } = defineProps<Props>()
@@ -19,14 +19,14 @@ const { movie } = defineProps<Props>()
 <template>
   <div class="movieTileWrapper">
     <div class="movieImage">
-      <img v-lazyload="movie.Poster" src="/" :alt="movie.Title" />
+      <img v-lazyload="movie.posterurl" src="/" :alt="movie.title" />
     </div>
     <div class="movieTitle">
-      {{ movie.Title }}
-      <Tag :text="movie.Year || ''" />
+      {{ movie.title }}
+      <Tag :text="movie.releaseDate.substring(0, 4) || ''" />
     </div>
     <div class="movieGenres">
-      <span>{{ movie.Genre }} </span>
+      <span>{{ movie.genres.join(', ') }} </span>
     </div>
   </div>
 </template>
