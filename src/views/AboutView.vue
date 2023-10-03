@@ -1,15 +1,33 @@
+<script lang="ts" setup>
+import ActionBar from '@/components/organisms/ActionBar/ActionBar.vue';
+import Header from '@/components/organisms/Header/Header.vue';
+import { useMoviesStore } from '@/stores/movies';
+
+import { storeToRefs } from 'pinia';
+const store = useMoviesStore()
+const loadMovies = store.loadMovies
+
+const { searchValue } = storeToRefs(store)
+
+</script>
+
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <transition name="slide">
+    <div>
+      <Header title="Find Your Movie" v-model="searchValue" />
+      <ActionBar />
+      <main class="content">
+        <div>
+          No Movies Found
+        </div>
+      </main>
+    </div>
+  </transition>
 </template>
 
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
+<style scoped lang="scss">
+.content {
+  padding: 40px 60px;
+  background: $color-black;
 }
 </style>

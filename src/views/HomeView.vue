@@ -8,27 +8,32 @@ import { useMoviesStore } from '@/stores/movies'
 import { onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 const store = useMoviesStore()
-const loadMovies = store.loadMovies
 const { movies } = storeToRefs(store)
+
+const { querySearch } = defineProps<{
+  querySearch?: string
+}>()
 
 const { searchTerm, filteredItems: filteredItems } = useSearch()
 // const { searchTerm, filteredItems: filteredItems, loading } = useMovies()
 
 const { searchValue } = storeToRefs(store)
+searchValue.value = querySearch || ''
 
-onMounted(() => {
-  loadMovies()
-})
 </script>
 
 <template>
-  <Header title="Find Your Movie" v-model="searchValue" />
-  <ActionBar />
-  <main class="content">
+  <transition name="slide">
     <div>
-      <MoviesList :items="movies" />
+      <Header title="Find Your Movie" v-model="searchValue" />
+      <ActionBar />
+      <main class="content">
+        <div>
+          <MoviesList :items="movies" />
+        </div>
+      </main>
     </div>
-  </main>
+  </transition>
 </template>
 
 <style scoped lang="scss">

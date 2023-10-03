@@ -1,11 +1,16 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
 import Footer from './components/organisms/Footer/Footer.vue';
+import { useMoviesStore } from './stores/movies';
+
+const store = useMoviesStore()
+const loadMovies = store.loadMovies
+
+loadMovies()
 </script>
 
 <template>
   <div class="contentWrapper">
-
     <RouterView />
 
     <Footer />
